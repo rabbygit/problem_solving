@@ -17,7 +17,7 @@ In this example, x is list in python and its value and memory address is [1, 2, 
 Some of Python’s mutable data types are: lists, byte arrays, sets, and dictionaries.
 
 ### Immutable:
-When value of a variable can be changed over time is called mutable.
+When value of a variable can not be changed over time is called mutable.
 
 Example:
 ```
