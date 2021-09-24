@@ -62,8 +62,8 @@ class Solution:
         
         # if curry has 1
         if curry:
-            new_node = ListNode(curry,result)
-            result = new_node
+            result = ListNode(curry,result)
+            curry = 0;
         
         # reverse the list
         while result:
