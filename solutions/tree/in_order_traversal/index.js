@@ -5,7 +5,6 @@
  * return the inorder traversal of its nodes' values.
  */
 
-
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
