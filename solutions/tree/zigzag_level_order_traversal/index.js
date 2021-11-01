@@ -1,4 +1,11 @@
 /**
+ * @author Rabby Hossain
+ * [Problem ref]{@link  https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/}
+ * @description Given the root of a binary tree,
+ *  return the zigzag level order traversal of its nodes' values. (i.e., 
+ * from left to right, then right to left for the next level and alternate between).
+ */
+/**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
  *     this.val = (val===undefined ? 0 : val)
