@@ -11,6 +11,18 @@
  * @param {number} targetSum
  * @return {boolean}
  */
-var hasPathSum = function (root, targetSum) {
+const hasPathSum = function (root, targetSum) {
+    let result = false;
 
+    function determinePathSum(root, sum) {
+        if (!root) return;
+
+        sum += root.val;
+
+        determinePathSum(root.left, sum);
+
+        if (!root.left && !root.right) {
+            sum += root.val
+        }
+    }
 };
