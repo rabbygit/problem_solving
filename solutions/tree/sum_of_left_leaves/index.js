@@ -1,4 +1,10 @@
 /**
+ * @author Rabby Hossain
+ * [Problem ref]{@link  https://leetcode.com/problems/sum-of-left-leaves/}
+ * @description Given the root of a binary tree, return the sum of all left leaves.
+ */
+
+/**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
  *     this.val = (val===undefined ? 0 : val)
