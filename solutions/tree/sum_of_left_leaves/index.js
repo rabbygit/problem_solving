@@ -26,7 +26,7 @@ const sumOfLeftLeaves = function (root) {
 
     traverse(root.left, level + 1, column - 1, column)
 
-    if (!root.left && !root.right && level > deepest_row && prev < column - 1) {
+    if (!root.left && !root.right && level > deepest_row && prev == column - 1) {
       deepest_row = level
       sum += root.val;
     }
