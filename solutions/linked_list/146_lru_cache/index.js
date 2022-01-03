@@ -5,7 +5,8 @@
  */
 
 class Node {
-    constructor(value) {
+    constructor(key, value) {
+        this.key = key
         this.value = value
         this.previous = null
         this.next = null
@@ -34,10 +35,30 @@ class LRUCache {
             return -1;
         }
 
+        const found_node = this.track_node[key]
+        const previous_node = found_node.previous
+
+        // found at first position
+        if (!previous_node) {
+            return found_node.value;
+        }
+
+        console.log(this.tail);
+        // found at last position
+        if (found_node.key === this.tail.key) {
+            this.remove_from_tail()
+        } else {
+            previous_node.next = found_node.next
+            found_node.previous = previous_node
+        }
+
         // put the node at first position
+        const new_node = new Node(key, found_node.value)
+        this.move_to_first(new_node)
+        this.track_node[key] = new_node
 
         // return the value
-        return this.track_node[key].value;
+        return found_node.value;
     }
 
     /**
@@ -46,25 +67,49 @@ class LRUCache {
      * @return {void}
      */
     put(key, value) {
-        const new_node = new Node(value)
+        if (this.track_node[key] !== undefined) {
+            const found_node = this.track_node[key]
+            const previous_node = found_node.previous
 
-        this.track_node[key] = new_node
-        this.move_to_first(new_node)
+            // found at first position
+            if (!previous_node) {
+                found_node.value = value
+                return
+            }
 
-        // remove from tail
-        console.log(this.length);
-        if (this.capacity < this.length) {
-            // console.log(this.capacity);
-            // console.log(this.length);
-            // console.log(this.tail);
-            // console.log(this.tail.previous);
-            this.tail = this.tail.previous
+            // found at last position
+            if (found_node.key === this.tail.key) {
+                // this.tail = this.tail.previous
+                // this.tail.next = null
+                this.remove_from_tail()
+            } else {
+                previous_node.next = found_node.next
+                found_node.previous = previous_node
+            }
+
+            this.length--
         }
+
+        // if cache capacity exceeds
+        if (this.capacity <= this.length) {
+            // remove from tail
+            this.length--
+            const removed = this.remove_from_tail()
+
+            // remove from the object
+            delete this.track_node[removed.key]
+        }
+
+        // create new node
+        const new_node = new Node(key, value)
+        // put the new node at first position
+        this.move_to_first(new_node)
+        // keep record of the new node in key-value pair
+        this.track_node[key] = new_node
+        this.length++
     }
 
     move_to_first(new_node) {
-        this.length++
-
         if (!this.cache) {
             this.cache = this.tail = new_node
             return
@@ -73,6 +118,19 @@ class LRUCache {
         new_node.next = this.cache
         this.cache.previous = new_node
         this.cache = new_node
+    }
+
+    remove_from_tail() {
+        const removedTail = this.tail;
+        this.tail = this.tail.previous
+
+        if (this.tail) {
+            this.tail.next = null
+        } else {
+            this.cache = null
+        }
+
+        return removedTail
     }
 }
 
@@ -83,10 +141,29 @@ class LRUCache {
  * obj.put(key,value)
  */
 
-const test = new LRUCache(2)
-test.put(1, 3)
-// console.log(test.cache);
+const test = new LRUCache(3)
+test.put(1, 1)
 test.put(2, 2)
-// console.log(test.cache);
-test.put(3, 1)
+test.put(3, 3)
+test.put(4, 4)
+
+
+console.log(test.get(4));
+console.log(test.get(3));
+// console.log(test.get(2));
+// // console.log(test.get(1));
+
+// test.put(5, 5)
+
+// console.log(test.get(1));
+// console.log(test.get(2));
+// console.log(test.get(3));
+// console.log(test.get(4));
+// console.log(test.get(5));
+
+
+// console.log(test.tail);
+
+// console.log('HEADDDDDDDDDDDDDDD');
+
 console.log(test.cache);
