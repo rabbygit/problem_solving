@@ -5,10 +5,10 @@
  */
 
 class Node {
-    constructor(prev = null, val, next = null) {
-        this.prev = prev
-        this.val = val
-        this.next = next
+    constructor(value) {
+        this.value = value
+        this.previous = null
+        this.next = null
     }
 }
 
@@ -46,22 +46,32 @@ class LRUCache {
      * @return {void}
      */
     put(key, value) {
-        const new_node = new Node(null, value, null)
+        const new_node = new Node(value)
 
         this.track_node[key] = new_node
         this.move_to_first(new_node)
 
         // remove from tail
-        if (this.capacity >= this.length) {
-            this.tail = this.tail.prev
+        console.log(this.length);
+        if (this.capacity < this.length) {
+            // console.log(this.capacity);
+            // console.log(this.length);
+            // console.log(this.tail);
+            // console.log(this.tail.previous);
+            this.tail = this.tail.previous
         }
     }
 
     move_to_first(new_node) {
-        if (this.cache) {
-            this.cache.prev = new_node
+        this.length++
+
+        if (!this.cache) {
+            this.cache = this.tail = new_node
+            return
         }
+
         new_node.next = this.cache
+        this.cache.previous = new_node
         this.cache = new_node
     }
 }
@@ -74,9 +84,9 @@ class LRUCache {
  */
 
 const test = new LRUCache(2)
-test.put(1, 1)
-console.log(test.cache);
+test.put(1, 3)
+// console.log(test.cache);
 test.put(2, 2)
-console.log(test.cache);
-test.put(3, 3)
+// console.log(test.cache);
+test.put(3, 1)
 console.log(test.cache);
