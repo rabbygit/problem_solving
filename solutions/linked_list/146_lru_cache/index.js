@@ -30,29 +30,22 @@ class LRUCache {
      * @return {number}
      */
     get(key) {
-        // if not present in cache return -1
-        if (this.track_node[key] === undefined) {
-            return -1;
-        }
-
         const found_node = this.track_node[key]
-        const previous_node = found_node.previous
 
-        // found at first position
-        if (!previous_node) {
-            return found_node.value;
-        }
+        // if not present in cache return -1
+        if (found_node === undefined) return -1
 
-        console.log(this.tail);
-        // found at last position
-        if (found_node.key === this.tail.key) {
+        // found at first position and has nothing to update
+        if (!found_node.previous) return found_node.value
+
+        // if found at last position or middle,then remove it
+        if (key === this.tail.key) {
             this.remove_from_tail()
         } else {
-            previous_node.next = found_node.next
-            found_node.previous = previous_node
+            this.remove_from_middle(found_node)
         }
 
-        // put the node at first position
+        // put the found node at first position
         const new_node = new Node(key, found_node.value)
         this.move_to_first(new_node)
         this.track_node[key] = new_node
@@ -67,24 +60,21 @@ class LRUCache {
      * @return {void}
      */
     put(key, value) {
-        if (this.track_node[key] !== undefined) {
-            const found_node = this.track_node[key]
-            const previous_node = found_node.previous
+        const found_node = this.track_node[key]
 
-            // found at first position
-            if (!previous_node) {
+        // if cache already has this key,then we need to update!
+        if (found_node) {
+            // found at first position, update its value
+            if (!found_node.previous) {
                 found_node.value = value
                 return
             }
 
-            // found at last position
-            if (found_node.key === this.tail.key) {
-                // this.tail = this.tail.previous
-                // this.tail.next = null
+            // if found at last position or middle,then remove it
+            if (key === this.tail.key) {
                 this.remove_from_tail()
             } else {
-                previous_node.next = found_node.next
-                found_node.previous = previous_node
+                this.remove_from_middle(found_node)
             }
 
             this.length--
@@ -93,11 +83,10 @@ class LRUCache {
         // if cache capacity exceeds
         if (this.capacity <= this.length) {
             // remove from tail
-            this.length--
             const removed = this.remove_from_tail()
-
             // remove from the object
             delete this.track_node[removed.key]
+            this.length--
         }
 
         // create new node
@@ -109,61 +98,48 @@ class LRUCache {
         this.length++
     }
 
+    /**
+     * @description prepend a node at first position of the list
+     * @param {*} new_node 
+     * @returns 
+     */
     move_to_first(new_node) {
-        if (!this.cache) {
+        // if cache is empty then new_node will be pointed as head and tail both
+        if (!this.length) {
             this.cache = this.tail = new_node
             return
         }
 
+        // otherwise,prepend at head
         new_node.next = this.cache
         this.cache.previous = new_node
         this.cache = new_node
     }
 
+    /**
+     * @description remove a node from last position of the list 
+     * @returns 
+     */
     remove_from_tail() {
         const removedTail = this.tail;
-        this.tail = this.tail.previous
+        this.tail = this.tail.previous // update tail pointer
+        removedTail.previous = null // close the connection
 
         if (this.tail) {
-            this.tail.next = null
+            this.tail.next = null // end of list
         } else {
-            this.cache = null
+            this.cache = null // list has no node after remove!
         }
 
         return removedTail
     }
+
+    /**
+     * @description remove node from middle of the list
+     * @param {*} node 
+     */
+    remove_from_middle(node) {
+        node.previous.next = node.next
+        node.next.previous = node.previous
+    }
 }
-
-/** 
- * Your LRUCache object will be instantiated and called as such:
- * var obj = new LRUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
-
-const test = new LRUCache(3)
-test.put(1, 1)
-test.put(2, 2)
-test.put(3, 3)
-test.put(4, 4)
-
-
-console.log(test.get(4));
-console.log(test.get(3));
-// console.log(test.get(2));
-// // console.log(test.get(1));
-
-// test.put(5, 5)
-
-// console.log(test.get(1));
-// console.log(test.get(2));
-// console.log(test.get(3));
-// console.log(test.get(4));
-// console.log(test.get(5));
-
-
-// console.log(test.tail);
-
-// console.log('HEADDDDDDDDDDDDDDD');
-
-console.log(test.cache);
