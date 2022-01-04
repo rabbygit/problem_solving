@@ -13,23 +13,25 @@ const generateParenthesis = function (n) {
   const result = []
 
   function generate(l, r, sub_result) {
+    // opening and closing parentheis are all used
     if (!l && !r) {
       result.push(sub_result);
       return;
     }
 
+    // go further when remaining opening parenthesis count is greater
     if (l > r) {
       return
     }
 
+    // add opening parenthesis if remains
     if (l) {
       generate(l - 1, r, sub_result + '(');
-      l += 1;
     }
 
+    // add closing parenthesis if remains
     if (r) {
       generate(l, r - 1, sub_result + ')');
-      r += 1;
     }
   }
 
