@@ -24,5 +24,3 @@ const isPalindrome = function (x) {
 
     return result == x
 };
-
-console.log(isPalindrome(0));
