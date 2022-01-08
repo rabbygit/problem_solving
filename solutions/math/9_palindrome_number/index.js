@@ -9,6 +9,11 @@
  * @return {boolean}
  */
 const isPalindrome = function (x) {
+    // filter all negative integers
+    if (x < 0) {
+        return false
+    }
+
     // reverse the integer
     let digit, result = 0, n = x
     while (n) {
