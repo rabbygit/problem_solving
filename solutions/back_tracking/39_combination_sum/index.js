@@ -14,7 +14,6 @@
 const combinationSum = function (candidates, target) {
     const result = []
     const n = candidates.length
-    let i = 0
 
     function generate_combination(sub_result, sum, i) {
         if (sum === target) {
@@ -37,7 +36,7 @@ const combinationSum = function (candidates, target) {
         }
     }
 
-    generate_combination([], 0, i)
+    generate_combination([], 0, 0)
 
     return result
 };
