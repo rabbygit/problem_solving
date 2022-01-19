@@ -14,12 +14,25 @@
 const subsets = function (nums) {
   const result = []
   const n = nums.length
+  const total_possibility = 2 ** n
 
   function backtrack(subresult, i) {
+    // all possible subsets found
+    if (result.length === total_possibility) {
+      return
+    }
+
+    // push possible subset
+    result.push([...subresult])
+
     for (let index = i; index < n; index++) {
-      const element = nums[index]
-      subresult.push(element)
+      subresult.push(nums[index])
       backtrack(subresult, index + 1)
+      subresult.pop()
     }
   }
+
+  backtrack([], 0)
+
+  return result
 };
