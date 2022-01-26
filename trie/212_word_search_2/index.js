@@ -49,14 +49,16 @@ class Trie {
         return
       }
 
-      visited[`${row}${column}`] = true
+      visited[`${row}${column}`] = true // track the position as visited
       current_root = current_root.letter_map[letter]
 
+      // If it is the end of a word
       if (current_root.isWord && !result_map[sub_result + letter]) {
-        result_map[sub_result + letter] = true
+        result_map[sub_result + letter] = true // take only unique solution
         result.push(sub_result + letter)
       }
 
+      // maximum 4 possible path can be possible for a position and we need to go every possible path
       if (column < total_column - 1) backtrack(row, column + 1, sub_result + letter, current_root, visited)
       if (column > 0) backtrack(row, column - 1, sub_result + letter, current_root, visited)
       if (row < total_row - 1) backtrack(row + 1, column, sub_result + letter, current_root, visited)
@@ -66,6 +68,7 @@ class Trie {
     }
 
 
+    // go through every single position and try all possiblity
     for (let i = 0; i < total_row; i++) {
       for (let j = 0; j < total_column; j++) {
         backtrack(i, j, '', this.root, {})
