@@ -6,93 +6,99 @@
  * so that the concatenation of the two words words[i] + words[j] is a palindrome.
  */
 
-
-class Node {
-    constructor() {
-        this.index = -1;
-        this.letter_map = {};
-        this.palindrom_list = []; // palindromes after this node
-    }
-}
-
 class Trie {
     constructor() {
-        this.root = new Node()
+        this.children = {};
+        this.word = null;
+        this.index = null;
     }
-
-    addWord(word, index) {
-        let root = this.root;
-
-        // add the word in trie in reverse order
-        for (let i = word.length - 1; i >= 0; i--) {
-            if (!root.letter_map[word[i]]){
-                root.letter_map[word[i]] = new Node(); // initialize
-            }
-
-            // check upto is palindrome upto this letter from the beginning of the word
-            if (isPalin(word, 0, i)){
-                root.palindrom_list.push(index);
-            }
-
-            // move to child
-            root = root.letter_map[word[i]];
-        }
-
-        // keep track of the word's index of words array
-        root.index = index;
-    }
-
-    searchPalin(word) {
-        let sub_result = [];
-        let root = this.root;
-
-        for (let index = 0; index < word.length; index++) {
-            if (root.index >= 0 && isPalin(word,0,word.length-1)) {
-                sub_result.push(root.index)
-            }
-
-            root = root.letter_map[word[index]]
-            
-            if (!root) {
-                return sub_result
-            }
-        }
-
-        // target is reversed base
-        if (root.index >= 0) sub_result.push(root.index);
-
-        // case 2
-        sub_result.push(...root.palindrom_list);
-        return sub_result;
-    }
-}
-
-function isPalin(word, i, j) {
-    while (i < j) if (word[i++] != word[j--]) return false;
-    return true;
 }
 
 /**
  * @param {string[]} words
  * @return {number[][]}
  */
-var palindromePairs = function (words) {
-    let trie = new Trie();
-    let result = [];
+const palindromePairs = function (words) {
+    const root = new Trie();
+    const res = []
+
     for (let i = 0; i < words.length; i++) {
-        trie.addWord(words[i], i);
+        if (!words[i]) continue;
+        buildTrie(root, words[i], i)
     }
 
     for (let i = 0; i < words.length; i++) {
-        let candidates = trie.searchPalin(words[i]);
-        for (let c of candidates) {
-            if (i === c) {
-                continue
-            }
+        const isEmptyChar = !words[i];
+        searchPrefix(words[i], root, res, i, isEmptyChar)
+    }
 
-            result.push([i, c]);
+    return res;
+};
+
+function buildTrie(root, word, index) {
+    let node = root;
+
+    // build the trie in reverse order
+    for (let i = word.length - 1; i >= 0; i--) {
+        const c = word[i];
+        if (!node.children[c]) node.children[c] = new Trie();
+        node = node.children[c]
+    }
+
+    node.word = word;
+    node.index = index;
+}
+
+function searchPrefix(prefix, root, res, initialIndex, isEmptyChar) {
+    let node = root;
+
+    for (let i = 0; i < prefix.length; i++) {
+        const w = prefix[i];
+        if (!node.children[w]) {
+            return res;
+        }
+
+        if (node.children[w].word && i < prefix.length - 1) {
+            // if the child node is already a word, 
+            // and we want to check if remainder of the prefix builds is a palindrome, 
+            // then we have a match
+            checkIfMatch(node.children[w], res, prefix.substring(i + 1), initialIndex, isEmptyChar)
+        }
+
+        node = node.children[w];
+    }
+
+    // here we search for the past the entire prefix
+    dfs(node, res, '', initialIndex, isEmptyChar)
+    return res;
+}
+
+function dfs(node, res, str, initialIndex, isEmptyChar) {
+    checkIfMatch(node, res, str, initialIndex, isEmptyChar)
+    for (let c in node.children) {
+        const s = str + c;
+        dfs(node.children[c], res, s, initialIndex, isEmptyChar)
+    }
+}
+
+function checkIfMatch(node, res, str, initialIndex, isEmptyChar) {
+    if (node.word && isPalindrome(str) && node.index !== initialIndex) {
+        pushIntoResults(initialIndex, node.index, res)
+        if (isEmptyChar) {
+            pushIntoResults(node.index, initialIndex, res)
         }
     }
+}
 
-    return result;
+function pushIntoResults(index1, index2, res) {
+    res.push([index1, index2])
+}
+
+function isPalindrome(s) {
+    let end = s.length - 1;
+    for (let start = 0; start < s.length / 2; start++) {
+        if (s[start] !== s[end]) return false;
+        end--;
+    }
+    return true;
 }
