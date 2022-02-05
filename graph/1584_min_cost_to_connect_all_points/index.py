@@ -39,6 +39,7 @@ class UnionFind:
         return self.find(x) == self.find(y)
 
 class Solution:
+    # kruskal algorithm
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         # using kruskal's algorithm to find minimum spanning tree
         size = len(points)
@@ -71,5 +72,51 @@ class Solution:
                 uf.union(edge.point1, edge.point2)
                 min_cost += edge.cost
                 count -= 1
+
+        return min_cost
+
+    # using prim's algorithm
+    def minCostConnectPointsPrim(self, points: List[List[int]]) -> int:
+        # using prim's algorithm to find minimum spanning tree
+        size = len(points)
+        count = size - 1
+        min_cost = 0
+        priority_queue = []
+        visited = [False] * size # to track visited node
+
+        # add all edges to min heap starting from vertex 0
+        x1 , y1 = points[0]
+        for j in range(1, size):
+            x2 , y2 = points[j]
+            # calculate distance between two points
+            cost = abs(x1 - x2) + abs(y1 - y2)
+            edge = Edge(0, j, cost)
+            priority_queue.append(edge)
+
+        # represent the edges in the priority queqe
+        heapq.heapify(priority_queue)
+        visited[0] = True # mark vertex 0 as visited
+
+        # construct the minimum spaning tree using prim's algorithm
+        # steps:
+        # 1. take the minimum cost edge
+        # 2. connect the edge if destination vertex is not visited yet
+        # 3. take all edges starting from the destinantion vertex and insert in the heap
+        # 4. repeat
+        while priority_queue and count > 0:
+            edge = heapq.heappop(priority_queue)
+            point2 = edge.point2
+            cost = edge.cost
+            if not visited[point2]:
+                min_cost += cost
+                count -= 1
+                visited[point2] = True
+
+                # add all edges starting from point2 in the heap
+                for j in range(size):
+                    if not visited[j]:
+                        distance = abs(points[point2][0] - points[j][0]) + \
+                                   abs(points[point2][1] - points[j][1])
+                        heapq.heappush(priority_queue,Edge(point2 , j , distance))
 
         return min_cost
