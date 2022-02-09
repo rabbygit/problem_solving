@@ -18,17 +18,17 @@
  * @param {number} k
  * @return {number}
  */
-const findCheapestPrice = function(n, flights, src, dst, k) {
+const findCheapestPrice = function (n, flights, src, dst, k) {
     let previous = Array(n).fill(Number.POSITIVE_INFINITY) // keep shortest path using at most (k-1)th edges
     let current = Array(n).fill(Number.POSITIVE_INFINITY) // keep shortest path using at most (k)th edges
 
     // using no edges we can only go to the src node itself.so,cost is 0
     previous[src] = 0
 
-    for (let index = 1; index < k+2; index++) {
+    for (let index = 1; index < k + 2; index++) {
         current[src] = 0
 
-        flights.forEach(([previous_flight,current_flight,cost]) => {
+        flights.forEach(([previous_flight, current_flight, cost]) => {
             // path relaxation for every edge if needed
             if (previous[previous_flight] + cost < current[current_flight]) {
                 current[current_flight] = previous[previous_flight] + cost
