@@ -16,20 +16,37 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-const swapPairs = function(head) {
-    if (!head) return  head
+const swapPairs = function (head) {
+  // return if list has no or one node
+  if (!head || !head.next) return head;
 
-    let slow = head
-    let fast = head.next
+  // two pointer
+  let slow = head
+  let fast = head.next
+  let prev = null
 
-    while (slow && fast) {
-        let temp = fast.next
-        slow.next = temp
-        fast.next = slow
+  while (slow && fast) {
+    let temp = fast.next
 
-      if (slow.next) slow = slow.next.next
-      if(fast.next) fast = fast.next.next
+    // swap head node
+    if (!prev) {
+      head = fast
+      head.next = slow
+      head.next.next = temp
+    } else {
+      // swap nodes from middle
+      prev.next = fast
+      prev.next.next = slow
+      slow.next = temp
     }
 
-    return head
+    // keep track of previous node for swaping from the middle of the list
+    prev = slow
+
+    // update the pointers to next
+    slow = temp
+    if (slow) fast = slow.next
+  }
+
+  return head
 };
