@@ -22,74 +22,31 @@
  * @return {void} Do not return anything, modify root in-place instead.
  */
 const flatten = function (root) {
-  const linked_list = new List()
-
   function traverse(node) {
     if (!node) return
 
-    // add the node to linked list
-    linked_list.add(node.val)
-
+    // move to left
     traverse(node.left)
+    
+    // if left sub tree has any node,we will move this node to right sub tree
+    if(node.left){
+      // keep track the current right node
+      let temp =  node.right
+
+      // move the left node to right and mark left as null
+      node.right = node.left
+      node.left  = null
+
+      // keep the current right node to the end of new right sub tree
+      let t = node.right
+      while (t.right) {
+        t = t.right
+      }
+      t.right = temp
+    }
+
     traverse(node.right)
   }
 
   traverse(root)
-
-  return linked_list.returnHead()
 };
-
-class TreeNode {
-  constructor(val, left, right) {
-    this.val = (val === undefined ? 0 : val)
-    this.left = (left === undefined ? null : left)
-    this.right = (right === undefined ? null : right)
-  }
-}
-
-class List {
-  constructor() {
-    this.head = null
-    this.tail = null
-  }
-
-  add(value) {
-    const node = new TreeNode(value, null, null)
-    if (!this.head) {
-      this.head = this.tail = node
-      return
-    }
-
-    // add to tail
-    this.tail.right = node
-    this.tail = node
-  }
-
-  returnHead() {
-    return this.head
-  }
-}
-
-const root = {
-  val: 1,
-  left: {
-    val: 2,
-    left: {
-      val: 3,
-      left: null,
-      right: null
-    },
-    right: null
-  },
-  right: {
-    val: 5,
-    left: null,
-    right: {
-      val: 6,
-      left: null,
-      right: null
-    }
-  }
-}
-
-console.log(flatten(root));
