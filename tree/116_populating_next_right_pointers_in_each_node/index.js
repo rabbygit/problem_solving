@@ -17,12 +17,12 @@ const connect = function (root) {
   if (!root) return root
 
   // traverse tree and keep track of level
-  function bfs(node, level) {
+  function dfs(node, level) {
     // if root is null then return
     if (!node) return;
 
     // go left and increase level by 1
-    bfs(node.left, level + 1)
+    dfs(node.left, level + 1)
 
     // check if the level is already visited or not
     // if visited then update the current node's next pointer to current visiting node
@@ -37,10 +37,10 @@ const connect = function (root) {
     }
 
     // go right and increase level by 1
-    bfs(node.right, level + 1)
+    dfs(node.right, level + 1)
   }
 
-  bfs(root, 0)
+  dfs(root, 0)
 
   return root
 };

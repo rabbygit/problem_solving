@@ -15,13 +15,13 @@ class Solution:
         if not root:
             return root
 
-        # traverse tree level wise
-        def bfs(node, level):
+        # traverse tree and keep track of level
+        def dfs(node, level):
             if not node:
                 return
 
             # go to left sub-tree
-            bfs(node.left, level + 1)
+            dfs(node.left, level + 1)
 
             # check if this level is already visited or not
             # if not visited yet then keep the current node as level's value
@@ -35,8 +35,8 @@ class Solution:
                 level_list[level] = node
 
             # go to right sub-tree
-            bfs(node.right, level + 1)
+            dfs(node.right, level + 1)
 
-        bfs(root, 0)
+        dfs(root, 0)
 
         return root
