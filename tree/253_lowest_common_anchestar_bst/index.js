@@ -21,36 +21,18 @@
  * @return {TreeNode}
  */
 const lowestCommonAncestor = function (root, p, q) {
-  let small_num;
-  let big_num;
-  let p_root = null;
+  let current = root;
 
-  if (p.val > q.val) {
-    big_num = p.val
-    small_num = q.val
-  } else {
-    big_num = q.val
-    small_num = p.val
-  }
-
-  function findAnchestor(root) {
-    if (root.val === small_num || root.val === big_num) return root
-
-    p_root = root
-
-    if (root.left && root.val > small_num) {
-      return findAnchestor(root.left)
+  while (current) {
+    // if both p and q's values are greater than the current node, it means need to move right sub tree
+    // else to left sub tree
+    // otherwise, p or q must exist in left or right subtree and this current node is the ancestor
+    if (p.val > current.val && q.val > current.val) {
+      current = current.right
+    } else if (p.val < current.val && q.val < current.val) {
+      current = current.left
+    } else {
+      return current
     }
-
-    if (root.right) return findAnchestor(root.right)
   }
-
-  let found_node = findAnchestor(root)
-
-  if (p_root && p_root.left && p_root.right &&
-    p_root.left.val === small_num && p_root.right.val === big_num) {
-    return p_root
-  }
-
-  return found_node;
 };
