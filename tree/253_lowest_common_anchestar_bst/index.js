@@ -23,7 +23,6 @@
 const lowestCommonAncestor = function (root, p, q) {
   let small_num;
   let big_num;
-  let p_root = null;
 
   if (p.val > q.val) {
     big_num = p.val
@@ -33,24 +32,25 @@ const lowestCommonAncestor = function (root, p, q) {
     small_num = p.val
   }
 
+  if (root.val === small_num || root.val === big_num) {
+    return root;
+  }
+
   function findAnchestor(root) {
-    if (root.val === small_num || root.val === big_num) return root
-
-    p_root = root
-
-    if (root.left && root.val > small_num) {
-      return findAnchestor(root.left)
+    if (root.val === small_num || root.val === big_num) {
+      return true
     }
 
-    if (root.right) return findAnchestor(root.right)
+    let left = null
+    let right = null
+    if (root.left && root.val > small_num) {
+      left =  findAnchestor(root.left)
+    }
+
+    if (root.right) {
+      right = findAnchestor(root.right)
+    }
+
+    return 
   }
-
-  let found_node = findAnchestor(root)
-
-  if (p_root && p_root.left && p_root.right &&
-    p_root.left.val === small_num && p_root.right.val === big_num) {
-    return p_root
-  }
-
-  return found_node;
 };
