@@ -24,25 +24,27 @@
  * @return {TreeNode}
  */
 const mergeTrees = function (root1, root2) {
-    function merge(node1, node2, prev) {
-        if (!node1 && !node2) {
-            return
-        }
+    function merge(node1, node2, prev, call) {
+        if (!node1 && !node2) return
 
         if (node1 && node2) {
+            // overlap and sum value
             node2.val = node1.val + node2.val
-        }else if (node1 && prev) {
-            if (!prev.left) prev.left = node1
-            else if(!prev.right) prev.right = node1
+        } else if (node1 && prev) {
+            // left root has value but right root doesn't have, in that case we have to
+            // add the left root to result tree's left or right
+            // if it is call for left sub tree than add as left child otherwise right child
+            if (!prev.left && call == 'l') prev.left = node1
+            else prev.right = node1
         }
 
         prev = node2
 
-        merge(node1 ? node1.left : null, node2 ? node2.left : null, prev)
-        merge(node1 ? node1.right : null, node2 ? node2.right : null, prev)
+        merge(node1 ? node1.left : null, node2 ? node2.left : null, prev , 'l')
+        merge(node1 ? node1.right : null, node2 ? node2.right : null, prev , 'r')
     }
 
-    merge(root1, root2, null)
+    merge(root1, root2, root2)
 
     return root2 ? root2 : root1
 };
