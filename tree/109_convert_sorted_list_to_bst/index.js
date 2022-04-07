@@ -22,7 +22,11 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-
+function TreeNode(val, left, right) {
+  this.val = (val === undefined ? 0 : val)
+  this.left = (left === undefined ? null : left)
+  this.right = (right === undefined ? null : right)
+}
 /**
  * @param {ListNode} head
  * @return {TreeNode}
@@ -38,6 +42,7 @@ const sortedListToBST = function (head) {
     node = node.next
   }
 
+  // construct the tree recursively
   function constructBST(left, right) {
     if (left > right) {
       return null
@@ -54,22 +59,3 @@ const sortedListToBST = function (head) {
 
   return constructBST(0, length - 1)
 };
-
-const head = {
-  val: -10,
-  next: {
-    val: -3,
-    next: {
-      val: 0,
-      next: {
-        val: 5,
-        next: {
-          val: 9,
-          next: null
-        }
-      }
-    }
-  }
-}
-
-sortedListToBST(head)
