@@ -13,34 +13,75 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
+
 /**
+ * @description determines height of the sub-tree
+ * @param {*} node 
+ * @returns 
+ */
+function height(node) {
+  if (!node) return -1
+
+  return Math.max(height(node.left), height(node.right)) + 1
+}
+
+/**
+ * @description run time O(n log n)
  * @param {TreeNode} root
  * @return {boolean}
  */
 const isBalanced = function (root) {
   if (!root) return true
 
-  function maxDepth(node) {
-    if (!node) return -1
+  let left_tree_height = height(root.left)
+  let right_tree_height = height(root.right)
 
-    let left_depth = maxDepth(node.left)
-    let right_depth = maxDepth(node.right)
+  let diff = Math.abs(left_tree_height - right_tree_height)
 
-    return Math.max(left_depth, right_depth) + 1
+  if (diff > 1) {
+    return false // propagate the result
+  } else {
+    // recursively check for every left and right sub-tree
+    return isBalanced(root.left) && isBalanced(root.right)
   }
-
-  return Math.abs(maxDepth(root.left) - maxDepth(root.right)) < 2
 };
 
 
-const root = {
-  val: 1,
-  left: null,
-  right: {
-    val: 1,
-    left: null,
-    right: null
-  }
-}
 
-console.log(isBalanced(root))
+///////////////////////////////////////////////////////////////
+
+/**
+ * @description check the sub-tree when determines the height , run time O(n)
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+const checkBalance = function (root) {
+  if (!root) return -1
+
+  let left_tree_height = checkBalance(root.left)
+  if (left_tree_height === Number.MIN_SAFE_INTEGER) {
+    return Number.MIN_SAFE_INTEGER
+  }
+
+  let right_tree_height = checkBalance(root.right)
+  if (right_tree_height === Number.MIN_SAFE_INTEGER) {
+    return Number.MIN_SAFE_INTEGER
+  }
+
+  let diff = Math.abs(left_tree_height - right_tree_height)
+
+  if (diff > 1) {
+    return Number.MIN_SAFE_INTEGER // propagate the result
+  } else {
+    return Math.max(left_tree_height, right_tree_height) + 1
+  }
+};
+
+
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+const isBalanced = function (root) {
+  return checkBalance(root) !== Number.MIN_SAFE_INTEGER
+};
