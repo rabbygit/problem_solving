@@ -14,7 +14,7 @@ const strStr = function (haystack, needle) {
     const map = {}
     const needle_len = needle.length
 
-    if (!needle_len)  return 0;
+    if (!needle_len) return 0;
 
     for (let index = 0; index < haystack.length; index++) {
         const str_part = haystack.slice(index, needle_len + index)
