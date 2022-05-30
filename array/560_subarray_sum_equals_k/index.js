@@ -7,11 +7,12 @@
  */
 
 /**
+ * @description this solution works only for non-negative
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
-const subarraySum = function (nums, k) {
+const subarraySumNonNegative = function (nums, k) {
   let current_sum = 0
   let start_idx = 0
   let result = 0
@@ -32,4 +33,28 @@ const subarraySum = function (nums, k) {
   return result
 };
 
-console.log(subarraySum([1], 0))
+/**
+ * @description this solution works for both positive and negative
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+const subarraySum = function (nums, k) {
+  let result = 0
+  let current_sum = 0
+  let prefix_map = {} // prefix sum as key and index will be value
+
+  for (let index = 0; index < nums.length; index++) {
+    current_sum += nums[index]
+
+    if (current_sum === k) result++
+
+    if (prefix_map[current_sum - k] !== undefined) {
+      result += prefix_map[current_sum - k]
+    }
+
+    prefix_map[current_sum] === undefined ? prefix_map[current_sum] = 1 : prefix_map[current_sum]++
+  }
+
+  return result;
+};
