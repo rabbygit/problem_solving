@@ -6,50 +6,43 @@
 
 class MinStack {
   constructor() {
-    this.stack = []
-    this.min = []
+    this.stack = [];
   }
 
-  /** 
+  /**
    * @param {number} val
    * @return {void}
    */
   push(val) {
-    this.setMin(val)
-    this.stack.push(val)
-  };
+    let current_min = val;
+    if (this.stack.length && this.getTopElement().current_min < val) {
+      current_min = this.getTopElement().current_min;
+    }
+    this.stack.push({ val, current_min });
+  }
 
   /**
    * @return {void}
    */
   pop() {
-    let val = this.stack.pop()
-    this.popMin(val)
-  };
+    this.stack.pop();
+  }
 
   /**
    * @return {number}
    */
   top() {
-    return this.stack[this.stack.length - 1]
-  };
+    return this.getTopElement().val;
+  }
 
   /**
    * @return {number}
    */
   getMin() {
-    return this.min[this.min.length - 1]
-  };
-
-  setMin(val) {
-    if (!this.min.length || this.min[this.min.length - 1] >= val) {
-      this.min.push(val)
-    }
+    return this.getTopElement().current_min;
   }
 
-  popMin(val) {
-    if (this.min.length && this.min[this.min.length - 1] === val) {
-      this.min.pop()
-    }
+  getTopElement() {
+    return this.stack[this.stack.length - 1];
   }
 }

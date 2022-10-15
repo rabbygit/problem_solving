@@ -3,27 +3,20 @@ from typing import List
 
 class MinStack:
     def __init__(self):
-        self.stack: List[int] = []
-        self.min: List[int] = []
+        self.stack: List[dict] = []
 
     def push(self, val: int) -> None:
-        self.setMin(val)
-        self.stack.append(val)
+        current_min = val
+        if len(self.stack) and self.stack[-1]['current_min'] < val:
+            current_min = self.stack[-1]['current_min']
+
+        self.stack.append({ 'val': val, 'current_min': current_min })
 
     def pop(self) -> None:
-        value = self.stack.pop()
-        self.popMin(value)
+        self.stack.pop()
 
     def top(self) -> int:
-        return self.stack[-1]
+        return self.stack[-1]['val']
 
     def getMin(self) -> int:
-        return self.min[-1]
-
-    def setMin(self, value):
-        if not len(self.min) or self.min[-1] >= value:
-            self.min.append(value)
-
-    def popMin(self, value):
-        if len(self.min) and self.min[-1] == value:
-            self.min.pop()
+        return self.stack[-1]['current_min']
