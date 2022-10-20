@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/}
  * @description Given two integer arrays preorder and inorder 
  * where preorder is the preorder traversal of a binary tree and 

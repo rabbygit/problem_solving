@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link https://leetcode.com/problems/palindrome-number/}
  * @description An integer is a palindrome when it reads the same backward as forward.
  */

@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/design-hashmap/}
  * @description Design a HashMap without using any built-in hash table libraries.
 */

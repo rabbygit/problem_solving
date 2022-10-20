@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link https://leetcode.com/problems/binary-tree-postorder-traversal/}
  * @description Given the root of a binary tree, return the postorder traversal of its nodes' values.
  */

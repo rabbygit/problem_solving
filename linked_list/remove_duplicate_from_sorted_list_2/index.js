@@ -1,7 +1,7 @@
 
 /**
  *
- * @author Rabby Hossain
+ 
  * [Problem ref]{@link https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii}
  * @description Given the head of a sorted linked list, delete all nodes that have duplicate numbers,
  * @description leaving only distinct numbers from the original list. Return the linked list sorted as well.

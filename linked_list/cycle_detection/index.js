@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/linked-list-cycle}
  * @description Given head, the head of a linked list, determine if the linked list has a cycle in it.
  */

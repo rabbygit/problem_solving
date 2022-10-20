@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/word-search-ii/}
  * @description Given an m x n board of characters and a list of strings words,
  * return all words on the board.

@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/subarray-sum-equals-k/}
  * @description Given an array of integers nums and an integer k, 
  * return the total number of subarrays whose sum equals to k.

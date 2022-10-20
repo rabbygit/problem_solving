@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link https://leetcode.com/problems/longest-common-subsequence/}
  * @description Given two strings text1 and text2, 
  * return the length of their longest common subsequence. 

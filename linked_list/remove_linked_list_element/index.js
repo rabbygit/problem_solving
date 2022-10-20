@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/remove-linked-list-elements/}
  * @description Remove element from linked list
  */

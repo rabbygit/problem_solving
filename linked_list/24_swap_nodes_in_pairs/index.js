@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/swap-nodes-in-pairs/}
  * @description Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
  */

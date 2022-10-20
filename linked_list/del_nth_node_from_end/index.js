@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/remove-nth-node-from-end-of-list}
  * @description Remove n-th node from linked list in one pass
  */

@@ -1,6 +1,6 @@
 /**
  *
- * @author Rabby Hossain
+ 
  * [Problem ref]{@link https://leetcode.com/problems/merge-two-sorted-lists/}
  * @description Merge two sorted linked list
  */

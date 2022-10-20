@@ -1,6 +1,6 @@
 /**
  *
- * @author Rabby Hossain
+ 
  * [Problem ref]{@link https://leetcode.com/problems/design-linked-list/}
  * @description Design a likedlist
  */

@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link https://leetcode.com/problems/valid-sudoku/}
  * @description Determine if a 9 x 9 Sudoku board is valid
  * A sudoku solution must satisfy all of the following rules:

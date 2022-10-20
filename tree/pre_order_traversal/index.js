@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/binary-tree-preorder-traversal/}
  * @description Given the root of a binary tree,
  *  Given the root of a binary tree, 

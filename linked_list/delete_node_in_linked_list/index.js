@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/delete-node-in-a-linked-list/}
  * @description Write a function to delete a node in a singly-linked list. 
  * You will not be given access to the head of the list, 

@@ -1,5 +1,5 @@
 /**
- * @author Rabby Hossain
+ 
  * @description rotate linked to list to right
  * [Problem ref]{@link  https://leetcode.com/problems/rotate-list/} 
  */

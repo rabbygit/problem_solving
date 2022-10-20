@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/roman-to-integer/}
  * @description Given a roman numeral, convert it to an integer.
  */

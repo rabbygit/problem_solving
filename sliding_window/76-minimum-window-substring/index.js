@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link https://leetcode.com/problems/minimum-window-substring/description/}
  * @description Given two strings s and t of lengths m and n respectively,
  * return the minimum window substring of s such that every character in t (including duplicates) is included in the window.

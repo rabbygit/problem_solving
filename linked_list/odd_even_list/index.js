@@ -1,6 +1,6 @@
 /**
  *
- * @author Rabby Hossain
+ 
  * [Problem ref]{@link https://leetcode.com/problems/odd-even-linked-list/}
  * @description Given the head of a singly linked list, 
  * group all the nodes with odd indices together 

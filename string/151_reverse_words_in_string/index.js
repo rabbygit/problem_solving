@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/reverse-words-in-a-string/}
  * @description Given an input string s, reverse the order of the words.
  * A word is defined as a sequence of non-space characters. 

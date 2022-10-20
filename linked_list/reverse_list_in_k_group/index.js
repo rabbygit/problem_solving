@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link https://leetcode.com/problems/reverse-nodes-in-k-group/}
  * @description Given a linked list, 
  * reverse the nodes of a linked list k at a time 

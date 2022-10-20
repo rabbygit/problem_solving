@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link https://leetcode.com/problems/find-if-path-exists-in-graph}
  * @description There is a bi-directional graph with n vertices, 
  * where each vertex is labeled from 0 to n - 1 (inclusive). 

@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/reverse-linked-list/}
  * @description Reverse a linked list
  */

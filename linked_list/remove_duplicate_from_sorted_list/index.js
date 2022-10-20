@@ -1,6 +1,6 @@
 /**
  *
- * @author Rabby Hossain
+ 
  * [Problem ref]{@link https://leetcode.com/problems/remove-duplicates-from-sorted-list/}
  * @description Remove Duplicates from Sorted List
  */

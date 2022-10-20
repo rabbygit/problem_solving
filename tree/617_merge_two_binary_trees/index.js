@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/merge-two-binary-trees/}
  * @description You are given two binary trees root1 and root2.
  * Imagine that when you put one of them to cover the other, 

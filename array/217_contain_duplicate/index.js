@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/contains-duplicate/}
  * @description Given an integer array nums, 
  * return true if any value appears at least twice in the array, 

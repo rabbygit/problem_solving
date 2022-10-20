@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/design-hashset/}
  * @description Design a HashSet without using any built-in hash table libraries.
  */

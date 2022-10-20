@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/palindrome-pairs/}
  * @description Given a list of unique words, 
  * return all the pairs of the distinct indices (i, j) in the given list, 

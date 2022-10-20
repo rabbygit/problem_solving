@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/flatten-binary-tree-to-linked-list/}
  * @description Given the root of a binary tree, flatten the tree into a "linked list":
  * 1. The "linked list" should use the same TreeNode class 

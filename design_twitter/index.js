@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/design-twitter/}
  * @description Design a simplified version of Twitter where users can post tweets,
  *  follow/unfollow another user,

@@ -1,5 +1,4 @@
 /**
- * @author Rabby Hossain
  * [Problem ref]{@link  https://leetcode.com/problems/intersection-of-two-linked-lists/}
  * @description Given the heads of two singly linked-lists headA and headB, 
  *  return the node at which the two lists intersect.
