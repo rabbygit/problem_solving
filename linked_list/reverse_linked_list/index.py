@@ -4,14 +4,35 @@
 #         self.val = val
 #         self.next = next
 class Solution:
+
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        reverse_list = None
-        
-        # Reverse the list
-        while head:
-          temp = head.next
-          head.next = reverse_list
-          reverse_list = head
-          head = temp
-        
-        return reverse_list
+        reversed = None
+        current = head
+
+        while current:
+            temp = current.next
+            current.next = reversed
+            reversed = current
+            current = temp
+
+        return reversed
+
+    def reverseListRecurse(self,
+                           head: Optional[ListNode]) -> Optional[ListNode]:
+        reversedHead = None
+
+        def recurse(current):
+            if current.next is None:
+                nonlocal reversedHead
+                reversedHead = current
+                return
+
+            recurse(current.next)
+            temp = current.next
+            temp.next = current
+            current.next = None
+
+        if head:
+            recurse(head)
+
+        return reversedHead
