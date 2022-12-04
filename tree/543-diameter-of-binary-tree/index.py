@@ -7,20 +7,21 @@
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        self.mps = float("-inf")
 
-        def findmax(root):
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        self.diameter = float("-inf")
+
+        def findMax(root):
             if root is None:
                 return 0
 
-            lps = max(0 , findmax(root.left))
-            rps = max(0 , findmax(root.right))
+            leftMax = findMax(root.left)
+            rightMax = findMax(root.right)
 
-            self.mps = max(self.mps , lps + rps)
+            self.diameter = max(self.diameter, leftMax + rightMax)
 
-            return 1 + max(lps , rps)
-        
-        findmax(root)
+            return 1 + max(leftMax, rightMax)
 
-        return self.mps
+        findMax(root)
+
+        return self.diameter
