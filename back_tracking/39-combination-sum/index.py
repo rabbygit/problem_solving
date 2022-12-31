@@ -5,8 +5,7 @@ class Solution:
 
         def genrate_combination(sub_result, sum, i):
             if sum == target:
-                temp = sub_result[:]
-                result.append(temp)
+                result.append(sub_result.copy())
                 return
 
             if sum > target:
@@ -14,10 +13,8 @@ class Solution:
 
             for index in range(i, n):
                 candidate = candidates[index]
-                sum += candidate
                 sub_result.append(candidate)
-                genrate_combination(sub_result, sum, i)
-                sum -= candidate
+                genrate_combination(sub_result, sum + candidate, i)
                 sub_result.pop()
                 i += 1
 
