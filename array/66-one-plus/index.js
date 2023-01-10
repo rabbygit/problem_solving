@@ -10,7 +10,7 @@ const plusOne = function (digits) {
         const sum = digits[index] + hold;
         if (sum === 10) {
             digits[index] = 0;
-            t = 1;
+            hold = 1;
         } else {
             digits[index] = sum;
             hold = 0;
