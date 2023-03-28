@@ -17,14 +17,14 @@ class Solution:
 
         # create adjacency_list, calculate indegree
         for src, des in prerequisites:
-            adjacency_list[src].append(des)
-            indegree[src] = indegree.get(src, 0)
-            indegree[des] = indegree.get(des, 0) + 1
+            adjacency_list[des].append(src)
+            indegree[des] = indegree.get(des, 0)
+            indegree[src] = indegree.get(src, 0) + 1
 
         # add all the nodes to queue that have zero indegree to process
-        for k, v in indegree.items():
-            if v == 0:
-                q.append(k)
+        for key in range(numCourses):
+            if key not in indegree or indegree[key] == 0:
+                q.append(key)
 
         count = 0
         while q:
