@@ -9,7 +9,7 @@ class Solution:
         q = collections.deque()
         directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
 
-        # count total fresh oranges and 
+        # count total fresh oranges and
         # keep rotten to the queue
         for r in range(rows):
             for c in range(cols):
@@ -29,13 +29,12 @@ class Solution:
                 for dr, dc in directions:
                     row, col = r + dr, c + dc
 
-                    if row < 0 or col < 0 or row == rows or col == cols or grid[
-                            row][col] != 1:
-                        continue
+                    if row >= 0 and col >= 0 and row < rows and col < cols and grid[
+                            row][col] == 1:
 
-                    q.append([row, col])
-                    grid[row][col] = 2
-                    fresh -= 1
+                        q.append([row, col])
+                        grid[row][col] = 2
+                        fresh -= 1
 
             time += 1
 
