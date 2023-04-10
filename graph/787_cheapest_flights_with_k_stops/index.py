@@ -1,29 +1,29 @@
-import sys
 from typing import List
 
 
 class Solution:
-    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int,
+                          dst: int, k: int) -> int:
         # using Bellman-Ford Algorithm
-        INF = sys.maxsize
-        previous = [INF] * n  # keep shortest path using at most (k-1)th edges
-        current = [INF] * n  # keep shortest path using at most k th edges
+        INF = float("inf")
+        prices = [INF] * n  # keep shortest path using at most (k-1)th edges
+        prices[src] = 0
 
-        previous[src] = 0
-
-        for k in range(1, k+2):
-            current[src] = 0
+        for i in range(k + 1):
+            tempPrices = prices.copy()
 
             for flight in flights:
-                previous_flight, current_flight, cost = flight
+                s, d, cost = flight
+
+                if prices[s] == INF:
+                    continue
 
                 # path relaxation for every edge if needed
-                if previous[previous_flight] + cost < current[current_flight]:
-                    current[current_flight] = previous[previous_flight] + cost
+                if prices[s] + cost < tempPrices[d]:
+                    tempPrices[d] = prices[s] + cost
 
             # after every iteration update the previous state
-            previous = current.copy()
+            prices = tempPrices
 
-        if current[dst] == INF:
-            return -1
-        return current[dst]
+        return -1 if prices[dst] == INF else prices[dst]
