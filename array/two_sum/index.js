@@ -1,26 +1,22 @@
 /**
- * 
- 
+ *
  * [Problem ref]{@link  https://leetcode.com/problems/two-sum/}
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 const twoSum = function (nums, target) {
-  let result = [];
-  let obj = {};
+  const numHash = {}; // number -> index
 
   for (let index = 0; index < nums.length; index++) {
     const value = target - nums[index];
 
-    if (obj.hasOwnProperty(value)) {
-      result = [obj[value], index];
-      break;
+    if (numHash[value] !== undefined) {
+      return [numHash[value], index];
     } else {
-      obj[nums[index]] = index;
+      numHash[nums[index]] = index;
     }
-
   }
 
-  return result;
+  return [];
 };
