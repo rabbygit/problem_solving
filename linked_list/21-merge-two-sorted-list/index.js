@@ -21,42 +21,27 @@ class ListNode {
  * @return {ListNode}
  */
 const mergeTwoLists = function (l1, l2) {
-  let result = null;
-  let reverse = null;
+  const result = new ListNode();
+  let tail = result;
 
   // if both list have node
   while (l1 && l2) {
-    let val;
-    if (l1.val >= l2.val) {
-      val = l2.val;
-      l2 = l2.next;
-    } else {
-      val = l1.val;
+    if (l1.val < l2.val) {
+      tail.next = l1;
       l1 = l1.next;
+    } else {
+      tail.next = l2;
+      l2 = l2.next;
     }
 
-    result = new ListNode(val, result); // add the small val to result list
+    tail = tail.next;
   }
 
   // if l1 has node
-  while (l1) {
-    result = new ListNode(l1.val, result); // add the val to result list
-    l1 = l1.next; // move forward
-  }
+  if (l1) tail.next = l1;
 
   // if l2 has node
-  while (l2) {
-    result = new ListNode(l2.val, result); // add the val to result list
-    l2 = l2.next; // move forward
-  }
+  if (l2) tail.next = l2;
 
-  // reverse the result list
-  while (result) {
-    let temp = result.next;
-    result.next = reverse;
-    reverse = result;
-    result = temp;
-  }
-
-  return reverse;
+  return result.next;
 };
