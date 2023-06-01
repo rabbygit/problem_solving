@@ -21,8 +21,8 @@ class ListNode {
  */
 const addTwoNumbers = function (l1, l2) {
   let curry = 0;
-  let result = null;
-  let reverse = null;
+  let result = new ListNode();
+  let tail = result;
 
   // both list have node
   while (l1 && l2) {
@@ -35,9 +35,9 @@ const addTwoNumbers = function (l1, l2) {
       curry = 0;
     }
 
-    // create new node and add the node at head
-    let new_node = new ListNode(sum, result);
-    result = new_node;
+    // create new node and add the node at end
+    tail.next = new ListNode(sum);
+    tail = tail.next;
 
     // move forward
     l1 = l1.next;
@@ -55,9 +55,9 @@ const addTwoNumbers = function (l1, l2) {
       curry = 0;
     }
 
-    // create new node and add the node at head
-    let new_node = new ListNode(sum, result);
-    result = new_node;
+    // create new node and add the node at end
+    tail.next = new ListNode(sum);
+    tail = tail.next;
 
     // move forward
     l1 = l1.next;
@@ -74,9 +74,9 @@ const addTwoNumbers = function (l1, l2) {
       curry = 0;
     }
 
-    // create new node and add the node at head
-    let new_node = new ListNode(sum, result);
-    result = new_node;
+    // create new node and add the node at end
+    tail.next = new ListNode(sum);
+    tail = tail.next;
 
     // move forward
     l2 = l2.next;
@@ -84,17 +84,9 @@ const addTwoNumbers = function (l1, l2) {
 
   // if curry exits
   if (curry) {
-    result = new ListNode(curry, result);
+    tail.next = new ListNode(curry);
     curry = 0;
   }
 
-  // reverse the list
-  while (result) {
-    let temp = result.next;
-    result.next = reverse;
-    reverse = result;
-    result = temp;
-  }
-
-  return reverse;
+  return result.next;
 };

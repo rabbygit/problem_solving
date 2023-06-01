@@ -9,8 +9,8 @@ class Solution:
 
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         curry = 0
-        result = None
-        reverse = None
+        result = ListNode()
+        tail = result
 
         while l1 and l2:
             sum = l1.val + l2.val + curry
@@ -21,9 +21,9 @@ class Solution:
             else:
                 curry = 0
 
-            # create node and add at head
-            new_node = ListNode(sum, result)
-            result = new_node
+            # create node and add at end
+            tail.next = ListNode(sum)
+            tail = tail.next
 
             # move forward
             l1 = l1.next
@@ -39,9 +39,9 @@ class Solution:
             else:
                 curry = 0
 
-            # create node and add at head
-            new_node = ListNode(sum, result)
-            result = new_node
+            # create node and add at end
+            tail.next = ListNode(sum)
+            tail = tail.next
 
             # move forward
             l1 = l1.next
@@ -56,23 +56,16 @@ class Solution:
             else:
                 curry = 0
 
-            # create node and add at head
-            new_node = ListNode(sum, result)
-            result = new_node
+            # create node and add at end
+            tail.next = ListNode(sum)
+            tail = tail.next
 
             # move forward
             l2 = l2.next
 
         # if curry has 1
         if curry:
-            result = ListNode(curry, result)
+            tail.next = ListNode(curry)
             curry = 0
 
-        # reverse the list
-        while result:
-            temp = result.next
-            result.next = reverse
-            reverse = result
-            result = temp
-
-        return reverse
+        return result.next
