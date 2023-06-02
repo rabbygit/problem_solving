@@ -11,19 +11,19 @@
  * @return {number}
  */
 const maxArea = function (height) {
-  let largest_area = 0;
-  let left = 0;
-  let right = height.length - 1;
+  let area = 0;
+  let l = 0;
+  let r = height.length - 1;
 
-  while (left < right) {
-    if (height[left] < height[right]) {
-      largest_area = Math.max(largest_area, height[left] * (right - left));
-      left++;
+  while (l < r) {
+    area = Math.max(area, Math.min(height[l], height[r]) * (r - l));
+
+    if (height[l] < height[r]) {
+      l++;
     } else {
-      largest_area = Math.max(largest_area, height[right] * (right - left));
-      right--;
+      r--;
     }
   }
 
-  return largest_area;
+  return area;
 };
