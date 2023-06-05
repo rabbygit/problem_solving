@@ -42,3 +42,20 @@ const maxProfit1 = function (prices) {
 
   return max;
 };
+
+/**
+ * @param {number[]} prices
+ * @return {number}
+ * Complexity: Time:- O(n) , Space:- O(1)
+ */
+const maxProfit2 = function (prices) {
+  let minPrice = prices[0];
+  let result = 0;
+
+  for (const p of prices) {
+    minPrice = Math.min(minPrice, p);
+    result = Math.max(result, p - minPrice);
+  }
+
+  return result;
+};
