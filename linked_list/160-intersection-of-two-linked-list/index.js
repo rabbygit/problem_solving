@@ -1,6 +1,6 @@
 /**
  * [Problem ref]{@link  https://leetcode.com/problems/intersection-of-two-linked-lists/}
- * @description Given the heads of two singly linked-lists headA and headB, 
+ * @description Given the heads of two singly linked-lists headA and headB,
  *  return the node at which the two lists intersect.
  *  If the two linked lists have no intersection at all, return null.
  */
@@ -19,13 +19,13 @@
  * @return {ListNode}
  */
 const getIntersectionNode = function (headA, headB) {
-    let a = headA;
-    let b = headB;
+  let l1 = headA;
+  let l2 = headB;
 
-    while (a !== b) {
-        a = a === null ? headB : a.next;
-        b = b === null ? headA : b.next;
-    }
+  while (l1 != l2) {
+    l1 = !l1 ? headB : l1.next;
+    l2 = !l2 ? headA : l2.next;
+  }
 
-    return a;
+  return l1;
 };
