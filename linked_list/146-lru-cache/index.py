@@ -1,6 +1,6 @@
 class Node:
 
-    def __init__(self, key, value):
+    def __init__(self, key, value) -> None:
         self.key = key
         self.value = value
         self.prev = self.next = None
@@ -10,47 +10,49 @@ class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
+        self.currSize = 0
         self.nodeMap = {}
-        self.left, self.right = Node(0, 0), Node(0, 0)
+        self.head, self.tail = Node(0, 0), Node(0, 0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
 
-        # left = LRU and right = most recent node
-        self.left.next = self.right
-        self.right.prev = self.left
+    def removeNode(self, node: Node):
+        prevNode, nextNode = node.prev, node.next
+        prevNode.next = nextNode
+        nextNode.prev = prevNode
 
-    def remove(self, node):
-        prev, next = node.prev, node.next
-        prev.next = next
-        next.prev = prev
-
-    def insert(self, node):
-        prev = self.right.prev
-        prev.next = self.right.prev = node
-        node.prev = prev
-        node.next = self.right
+    def addNodeToHead(self, node: Node):
+        temp = self.head.next
+        self.head.next = temp.prev = node
+        node.prev = self.head
+        node.next = temp
 
     def get(self, key: int) -> int:
-        if key in self.nodeMap:
-            # remove and insert to right most position
-            self.remove(self.nodeMap[key])
-            self.insert(self.nodeMap[key])
-            return self.nodeMap[key].value
-        else:
+        if key not in self.nodeMap:
             return -1
 
+        node = self.nodeMap[key]
+        self.removeNode(node)
+        self.addNodeToHead(node)
+        return node.value
+
     def put(self, key: int, value: int) -> None:
-        if key in self.nodeMap:
-            self.remove(self.nodeMap[key])
+        if key not in self.nodeMap:
+            node = Node(key, value)
+            self.addNodeToHead(node)
+            self.nodeMap[key] = node
+            self.currSize += 1
+        else:
+            self.removeNode(self.nodeMap[key])
+            node = Node(key, value)
+            self.addNodeToHead(node)
+            self.nodeMap[key] = node
 
-        # insert as right most
-        self.nodeMap[key] = Node(key, value)
-        self.insert(self.nodeMap[key])
-
-        # check if capacity exceedes
-        if len(self.nodeMap) > self.capacity:
-            # remove left most node
-            node = self.left.next
-            self.remove(node)
+        if self.currSize > self.capacity:
+            node = self.tail.prev
+            self.removeNode(node)
             del self.nodeMap[node.key]
+            self.currSize -= 1
 
 
 # Your LRUCache object will be instantiated and called as such:
