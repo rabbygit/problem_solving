@@ -1,17 +1,13 @@
+from typing import List
+
+
 class Solution:
 
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         result = []
-        m = len(matrix)
-        if m == 0:
-            return result
-        n = len(matrix[0])
-
-        left = 0
-        top = 0
-        right = n - 1
-        bottom = m - 1
-        direction = 0
+        row, col = len(matrix), len(matrix[0])
+        direction = top = left = 0
+        right, bottom = col - 1, row - 1
 
         while left <= right and top <= bottom:
 
