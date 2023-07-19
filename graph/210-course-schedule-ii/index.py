@@ -1,4 +1,5 @@
 from collections import deque, defaultdict
+import collections
 from typing import List
 
 
@@ -11,7 +12,7 @@ class Solution:
         result = []
         in_degree = {}
         adjacency_list = defaultdict(list)
-        
+
         # build adjacency list to track neighbors
         # and update in_degree(number of dependent nodes) array
         for src, des in prerequisites:
@@ -38,5 +39,31 @@ class Solution:
         # check all node presents in the result array
         if len(result) < numCourses - 1:
             return []
+
+        return result
+
+    def findOrder1(self, numCourses: int,
+                   prerequisites: List[List[int]]) -> List[int]:
+        adj = collections.defaultdict(list)
+        currPath, visited, result = set(), set(), []
+
+        for crs, pre in prerequisites:
+            adj[crs].append(pre)
+
+        def dfs(crs):
+            if crs in currPath: return False
+            if crs in visited: return True
+
+            currPath.add(crs)
+            for pre in adj[crs]:
+                if not dfs(pre): return False
+
+            currPath.remove(crs)
+            visited.add(crs)
+            result.append(crs)
+            return True
+
+        for i in range(numCourses):
+            if not dfs(i): return []
 
         return result
