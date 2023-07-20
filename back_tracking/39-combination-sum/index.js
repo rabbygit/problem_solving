@@ -1,6 +1,6 @@
 /**
  * [Problem ref]{@link https://leetcode.com/problems/combination-sum/}
- * @description Given an array of distinct integers candidates and a target integer target, 
+ * @description Given an array of distinct integers candidates and a target integer target,
  * return a list of all unique combinations of candidates where the chosen numbers sum to target.
  *  You may return the combinations in any order.
  */
@@ -11,31 +11,25 @@
  * @return {number[][]}
  */
 const combinationSum = function (candidates, target) {
-    const result = []
-    const n = candidates.length
+  const result = [];
 
-    function generate_combination(sub_result, sum, i) {
-        if (sum === target) {
-            result.push([...sub_result])
-            return
-        }
-
-        if (sum > target) {
-            return
-        }
-
-        for (let index = i; index < n; index++) {
-            const candidate = candidates[index]
-            sub_result.push(candidate)
-            sum += candidate
-            generate_combination(sub_result, sum, i)
-            i++
-            sub_result.pop()
-            sum -= candidate
-        }
+  function dfs(sub_result, sum, i) {
+    if (sum === target) {
+      result.push([...sub_result]);
+      return;
     }
 
-    generate_combination([], 0, 0)
+    if (sum > target) return;
 
-    return result
+    for (let idx = i; idx < candidates.length; idx++) {
+      const num = candidates[idx];
+      sub_result.push(num);
+      dfs(sub_result, sum + num, i);
+      sub_result.pop();
+    }
+  }
+
+  dfs([], 0, 0);
+
+  return result;
 };
