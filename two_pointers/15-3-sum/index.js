@@ -1,53 +1,37 @@
 /**
  * [Problem ref]{@link  https://leetcode.com/problems/3sum/}
- * @description Given an integer array nums, return all the triplets 
+ * @description Given an integer array nums, return all the triplets
  * [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
  */
 
-
 const threeSum = function (nums) {
-	const result = []
-	const len = nums.length
-	nums = nums.sort((a, b) => a - b)
+  const result = [];
+  const len = nums.length;
+  nums = nums.sort((a, b) => a - b);
 
-	if (len < 3) {
-		return result
-	}
+  for (let i = 0; i < len; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
 
-	for (let index = 0; index < len - 2; index++) {
-		let left = index + 1
-		let right = len - 1
+    let left = i + 1;
+    let right = len - 1;
 
-		while (left < right) {
-			let sum = nums[index] + nums[left] + nums[right]
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
 
-			if (sum === 0) {
-				result.push([nums[index], nums[left], nums[right]])
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+        left++;
+        // avoid same element
+        while (left < right && nums[left] === nums[left - 1]) {
+          left++;
+        }
+      } else if (sum > 0) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+  }
 
-				// avoid same element
-				while (nums[left] === nums[left + 1] && left < right - 1) {
-					left++
-				}
-
-				// avoid same element
-				while (nums[right] === nums[right - 1] && left < right - 1) {
-					right--
-				}
-
-				left++
-
-			} else if (sum > 0) {
-				right--
-			} else {
-				left++
-			}
-
-			// avoid same element
-			while (nums[index] === nums[index + 1] && index < len - 3) {
-				index++
-			}
-		}
-	}
-
-	return result
+  return result;
 };
