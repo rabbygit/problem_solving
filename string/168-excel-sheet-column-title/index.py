@@ -4,8 +4,8 @@ class Solution:
         output = ''
 
         while columnNumber > 0:
-            charNumber = columnNumber - 1
-            output = chr(ord('A') + charNumber % 26) + output
-            columnNumber = charNumber // 26
+            columnNumber -= 1
+            output = chr(ord('A') + columnNumber % 26) + output
+            columnNumber = columnNumber // 26
 
         return output
