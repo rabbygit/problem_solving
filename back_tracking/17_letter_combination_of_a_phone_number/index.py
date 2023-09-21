@@ -1,6 +1,6 @@
 class Solution:
+
     def letterCombinations(self, digits: str) -> List[str]:
-        n = len(digits)
         result = []
         letter_map = {
             '2': 'abc',
@@ -13,19 +13,15 @@ class Solution:
             '9': 'wxyz'
         }
 
-        def generateCombination(sub_result,letter_index):
-            if len(sub_result) == n:
+        def generateCombination(i, sub_result):
+            if len(sub_result) == len(digits):
                 result.append(sub_result)
                 return
-            
-            letters = letter_map[digits[letter_index]]
-            for letter in letters:
-                generateCombination(sub_result + letter , letter_index + 1)
 
-        
-        if not n:
-            return result
-        
-        generateCombination('',0)
+            letters = letter_map[digits[i]]
+            for char in letters:
+                generateCombination(i + 1, sub_result + char)
+
+        if digits: generateCombination(0, '')
 
         return result
