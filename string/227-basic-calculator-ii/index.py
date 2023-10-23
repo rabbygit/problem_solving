@@ -1,14 +1,16 @@
 class Solution:
 
     def calculate(self, s: str) -> int:
-        l, prev, curr, res, last_op = 0, 0, 0, 0, '+'
+        idx = prev = curr = res = 0
+        last_op = '+'
 
-        while l < len(s):
-            if s[l].isdigit():
-                while l < len(s) and s[l].isdigit():
-                    curr = curr * 10 + int(s[l])
-                    l += 1
-                l -= 1
+        while idx < len(s):
+            char = s[idx]
+            if char.isdigit():
+                while idx < len(s) and s[idx].isdigit():
+                    curr = curr * 10 + int(s[idx])
+                    idx += 1
+                idx -= 1
                 if last_op == '+':
                     res += curr
                     prev = curr
@@ -24,8 +26,8 @@ class Solution:
                     res += int(prev / curr)
                     prev = int(prev / curr)
                 curr = 0
-            elif s[l] != ' ':
-                last_op = s[l]
-            l += 1
+            elif char != ' ':
+                last_op = char
+            idx += 1
 
         return res
