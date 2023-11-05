@@ -7,18 +7,18 @@
 
 
 class Solution:
-    def lowestCommonAncestor(
-        self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
-    ) -> "TreeNode":
-        current = root
 
-        while current:
+    def lowestCommonAncestor(self, root: "TreeNode", p: "TreeNode",
+                             q: "TreeNode") -> "TreeNode":
+        curr = root
+
+        while curr:
             # if both p and q's values are greater than the current node, it means need to move right sub tree
             # else to left sub tree
             # otherwise, p or q must exist in left or right subtree and this current node is the ancestor
-            if p.val > current.val and q.val > current.val:
-                current = current.right
-            elif p.val < current.val and q.val < current.val:
-                current = current.left
+            if p.val > curr.val and q.val > curr.val:
+                curr = curr.right
+            elif p.val < curr.val and q.val < curr.val:
+                curr = curr.left
             else:
-                return current
+                return curr
