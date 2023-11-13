@@ -1,8 +1,30 @@
-class Solution:
+import collections
+from typing import List
 
+class Solution:
+    # time complexity: O(E) + E * log E
+    # space complexity: O(E)
+    def findItinerary1(self, tickets: List[List[str]]) -> List[str]:
+        graph = collections.defaultdict(list)
+        tickets.sort(reverse=True)
+        res, stack = [], ["JFK"]
+
+        for src, dst in tickets:
+            graph[src].append(dst)
+
+        while stack:
+            c = stack[-1]
+            if c in graph and len(graph[c]):
+                stack.append(graph[c].pop())
+            else:
+                res.append(stack.pop())
+
+        return list(reversed(res))
+
+    # got TLE, time complexity: E * log E + E ^ d where d is the maximum number of outgoing flights from a particular airport.
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         result = ["JFK"]
-        tickets.sort() # sort the tickets for lexical order
+        tickets.sort()  # sort the tickets for lexical order
         adj = {src: [] for src, dst in tickets}
 
         for src, dst in tickets:
