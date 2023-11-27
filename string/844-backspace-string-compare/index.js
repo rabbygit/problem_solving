@@ -6,39 +6,14 @@
 const backspaceCompare = function (s, t) {
   let i = s.length - 1;
   let j = t.length - 1;
-  let skipS = 0;
-  let skipT = 0;
 
   while (i >= 0 || j >= 0) {
-    while (i >= 0) {
-      if (s[i] === "#") {
-        skipS++;
-        i--;
-      } else if (skipS > 0) {
-        skipS--;
-        i--;
-      } else {
-        break;
-      }
-    }
+    i = validIdx(s, i);
+    j = validIdx(t, j);
 
-    while (j >= 0) {
-      if (t[j] === "#") {
-        skipT++;
-        j--;
-      } else if (skipT > 0) {
-        skipT--;
-        j--;
-      } else {
-        break;
-      }
-    }
-
-    if (i >= 0 && j >= 0 && s[i] !== t[j]) {
-      return false;
-    } else if (i >= 0 !== j >= 0) {
-      return false;
-    }
+    const char_s = i > -1 ? s[i] : "";
+    const char_t = j > -1 ? t[j] : "";
+    if (char_s !== char_t) return false;
 
     i--;
     j--;
@@ -46,3 +21,21 @@ const backspaceCompare = function (s, t) {
 
   return true;
 };
+
+function validIdx(s, i) {
+  let skip = 0;
+
+  while (i >= 0) {
+    if (s[i] == "#") {
+      skip++;
+    } else if (skip > 0) {
+      skip--;
+    } else {
+      break;
+    }
+
+    i--;
+  }
+
+  return i;
+}
