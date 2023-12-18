@@ -1,3 +1,4 @@
+# T.C: (26 * n)
 class Solution:
 
     def checkInclusion(self, s1: str, s2: str) -> bool:
@@ -31,3 +32,45 @@ def isEqual(hash1, hash2):
             return False
 
     return True
+
+
+# T.C: (n)
+class Solution1:
+
+    def index(self, char):
+        return ord(char) - ord('a')
+
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s1) > len(s2): return False
+
+        s1Count, s2Count = [0] * 26, [0] * 26
+        l = matches = 0
+
+        for i in range(len(s1)):
+            s1Count[self.index(s1[i])] += 1
+            s2Count[self.index(s2[i])] += 1
+
+        for i in range(26):
+            if s1Count[i] == s2Count[i]:
+                matches += 1
+
+        for r in range(len(s1), len(s2)):
+            if matches == 26: return True
+
+            index = self.index(s2[r])
+            s2Count[index] += 1
+            if s1Count[index] == s2Count[index]:
+                matches += 1
+            elif s1Count[index] + 1 == s2Count[index]:
+                matches -= 1
+
+            index = self.index(s2[l])
+            s2Count[index] -= 1
+            if s1Count[index] == s2Count[index]:
+                matches += 1
+            elif s1Count[index] - 1 == s2Count[index]:
+                matches -= 1
+
+            l += 1
+
+        return matches == 26
