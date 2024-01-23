@@ -5,22 +5,21 @@ class Solution:
 
     def combinationSum(self, candidates: List[int],
                        target: int) -> List[List[int]]:
-        result = []
-        n = len(candidates)
+        n, res = len(candidates), []
 
-        def dfs(sub_result, sum, i):
-            if sum == target:
-                result.append(sub_result.copy())
+        def backtrack(i: int, subSum: int, subRes: List[int]):
+            if subSum == target:
+                res.append(subRes.copy())
                 return
 
-            if i >= n or sum > target:
+            if i >= n or subSum > target:
                 return
 
-            sub_result.append(candidates[i])
-            dfs(sub_result, sum + candidates[i], i)
-            sub_result.pop()
-            dfs(sub_result, sum, i + 1)
+            subRes.append(candidates[i])
+            backtrack(i, subSum + candidates[i], subRes)
 
-        dfs([], 0, 0)
+            subRes.pop()
+            backtrack(i + 1, subSum, subRes)
 
-        return result
+        backtrack(0, 0, [])
+        return res
