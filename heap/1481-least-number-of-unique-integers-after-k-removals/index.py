@@ -34,3 +34,10 @@ class Solution:
             k -= heapq.heappop(minHeap)
 
         return len(minHeap) + 1 if k < 0 else len(minHeap)
+    
+    # without heap
+    def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
+        minHeap = sorted(collections.Counter(arr).values(), reverse=True)
+        while k > 0:
+            k -= minHeap.pop()
+        return len(minHeap) + 1 if k < 0 else len(minHeap)
