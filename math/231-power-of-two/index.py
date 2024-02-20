@@ -20,6 +20,6 @@ class Solution3:
 
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        # n = 1000 -> (n-1) = 0000 (it works if there is only 1 bit(1) in the number)
-        # so, n = 1000 and (n - 1) = 0000. n & (n-1) = 0
+        # n = 8 = 1000 -> (n-1) = 7 = 0111 (it works if there is only 1 bit(1) in the number)
+        # so, n = 1000 and (n - 1) = 0111. n & (n-1) = 0
         return n > 0 and (n & (n - 1) == 0)
