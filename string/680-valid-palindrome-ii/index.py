@@ -7,6 +7,7 @@ class Solution:
                 # skipping left char
                 if self.isValidPart(s[l + 1 : r + 1]):
                     return True
+                # skipping right char
                 if self.isValidPart(s[l:r]):
                     return True
                 return False
