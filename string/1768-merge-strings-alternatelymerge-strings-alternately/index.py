@@ -1,4 +1,5 @@
 class Solution:
+    # Time & Space Complexity: O(n)
     def mergeAlternately(self, word1: str, word2: str) -> str:
         i = j = 0
         len1, len2 = len(word1), len(word2)
