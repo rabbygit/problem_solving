@@ -17,22 +17,22 @@ class Solution:
 
         return reversed
 
-    def reverseListRecurse(self,
-                           head: Optional[ListNode]) -> Optional[ListNode]:
-        reversedHead = None
-
-        def recurse(current):
-            if current.next is None:
-                nonlocal reversedHead
-                reversedHead = current
-                return
-
-            recurse(current.next)
-            temp = current.next
-            temp.next = current
-            current.next = None
-
-        if head:
+    class Solution1:
+        # T.C & M.C: O(n)
+        # explanation: https://www.youtube.com/watch?v=KYH83T4q6Vs&ab_channel=mycodeschool
+        def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+            if not head:
+                return None
+            
+            self.reversedHead = None
+            def recurse(node):
+                if node.next is None:
+                    self.reversedHead = node
+                    return
+                recurse(node.next)
+                q = node.next
+                q.next = node
+                node.next = None
+            
             recurse(head)
-
-        return reversedHead
+            return self.reversedHead
