@@ -1,5 +1,8 @@
-class Solution:
+from typing import List
 
+
+class Solution:
+    # T.C: O(m * n * 4 ^ len(word)) and S.C: O(len(word))
     def exist(self, board: List[List[str]], word: str) -> bool:
         wordLength = len(word)
         row = len(board)
@@ -10,18 +13,27 @@ class Solution:
                 return True
             # if r/c is out of bound, or letter doesn't match or
             # we already visited the index then return False
-            if (r < 0 or c < 0 or r >= row or c >= col
-                    or board[r][c] != word[i] or board[r][c] == '#'):
+            if (
+                r < 0
+                or c < 0
+                or r >= row
+                or c >= col
+                or board[r][c] != word[i]
+                or board[r][c] == "#"
+            ):
                 return False
 
             # remember which path we are visiting
             tempChar = board[r][c]
-            board[r][c] = '#'
+            board[r][c] = "#"
 
             # recursive call to 4 possible direction to find the word
-            found = (backtrack(r + 1, c, i + 1) or backtrack(r - 1, c, i + 1)
-                     or backtrack(r, c + 1, i + 1)
-                     or backtrack(r, c - 1, i + 1))
+            found = (
+                backtrack(r + 1, c, i + 1)
+                or backtrack(r - 1, c, i + 1)
+                or backtrack(r, c + 1, i + 1)
+                or backtrack(r, c - 1, i + 1)
+            )
 
             # remove the path from visiting path
             board[r][c] = tempChar

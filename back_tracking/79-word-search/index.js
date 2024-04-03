@@ -3,7 +3,7 @@
  * @param {string} word
  * @return {boolean}
  */
-// time complexity: O( m*n * 4^len(word) )
+// T.C: O(m * n * 4 ^ len(word)) and S.C: O(len(word))
 const exist = function (board, word) {
   const rows = board.length - 1;
   const cols = board[0].length - 1;
