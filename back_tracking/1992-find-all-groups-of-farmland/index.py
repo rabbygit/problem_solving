@@ -1,6 +1,7 @@
 from typing import List
 
 
+# T.C: O(m * n) and S.C: O(k)
 class Solution:
 
     def findFarmland(self, land: List[List[int]]) -> int:
