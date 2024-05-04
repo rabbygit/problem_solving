@@ -2,7 +2,7 @@ from typing import List
 
 
 class Solution:
-    # T.C: O(nlogn) and S.C: O(n)
+    # T.C: O(nlogn) and S.C: O(1)
     def numRescueBoats(self, people: List[int], limit: int) -> int:
         l, r = 0, len(people) - 1
         totalBoats = 0
