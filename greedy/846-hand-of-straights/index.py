@@ -1,3 +1,4 @@
+import collections
 import heapq
 
 
@@ -7,23 +8,22 @@ class Solution:
         if len(hand) % groupSize:
             return False
 
-        cardCount = {}
-        for n in hand:
-            cardCount[n] = 1 + cardCount.get(n, 0)
-
+        cardCount = collections.Counter(hand)
         minHeap = list(cardCount.keys())
         heapq.heapify(minHeap)
 
         while minHeap:
-            firstElement = minHeap[0]
+            first = minHeap[0]
 
-            for i in range(firstElement, firstElement + groupSize):
-                if i not in cardCount:
+            for card in range(first, first + groupSize):
+                if card not in cardCount:
                     return False
-                cardCount[i] -= 1
-                if cardCount[i] == 0:
-                    if minHeap[0] != i:
+
+                cardCount[card] -= 1
+                if cardCount[card] == 0:
+                    if card != minHeap[0]:
                         return False
                     heapq.heappop(minHeap)
+                    del cardCount[card]
 
         return True
