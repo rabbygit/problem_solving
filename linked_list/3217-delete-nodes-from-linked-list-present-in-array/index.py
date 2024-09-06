@@ -1,4 +1,3 @@
-import collections
 from typing import List, Optional
 
 
@@ -14,7 +13,7 @@ class Solution:
     def modifiedList(
         self, nums: List[int], head: Optional[ListNode]
     ) -> Optional[ListNode]:
-        numsMap = collections.Counter(nums)
+        numsMap = set(nums)
         prev = dummyHead = ListNode(0, head)
         curr = head
 
