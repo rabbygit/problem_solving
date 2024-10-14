@@ -4,6 +4,7 @@ from typing import List
 
 
 class Solution:
+    # T.C: O(n + k logn) and S.C: O(n)
     def maxKelements(self, nums: List[int], k: int) -> int:
         score = 0
         maxheap = [n * -1 for n in nums]
